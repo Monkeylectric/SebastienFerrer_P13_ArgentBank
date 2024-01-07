@@ -1,17 +1,32 @@
+import PropTypes from 'prop-types';
 import './Hero.css';
 
-function Hero(props) {
+/**
+ * Compoent which displays hero banner 
+ * component with subtitles and text
+ * 
+ * @param {Object} subtitles 
+ * @param {String} text 
+ * 
+ * @returns Hero component
+ */
+function Hero({subtitles, text}) {
     return (
         <div className="hero">
             <section className="hero-content">
                 <h2 className="sr-only">Promoted Content</h2>
-                {props.subtitles.map((subtitle, index) => (
+                {subtitles.map((subtitle, index) => (
                     <p key={index} className="subtitle">{subtitle}</p>
                 ))}
-                <p className="text">{props.text}</p>
+                <p className="text">{text}</p>
             </section>
         </div>
     )
+}
+
+Hero.propTypes = {
+    subtitles: PropTypes.object,
+    text: PropTypes.string,
 }
 
 export default Hero;

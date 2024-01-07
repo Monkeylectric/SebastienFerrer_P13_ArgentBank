@@ -10,26 +10,18 @@ function App() {
         {
             path: "/",
             element: <Home />,
-            // loader:
-            // errorElement:
         },
         {
             path: "/signin",
             element: <SignIn />
-            //loader:
-            //errorElement:
         },
         {
             path: "/user",
             element: <User />
-            //loader:
-            //errorElement:
         },
         {
             path: "/transactions",
             element: <Transactions />
-            //loader:
-            //errorElement:
         },
     ]);
 

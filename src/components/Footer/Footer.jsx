@@ -1,5 +1,10 @@
 import './Footer.css';
 
+/**
+ * Component which displays footer
+ * 
+ * @returns Footer component
+ */
 function Footer() {
     return (
         <footer className="footer">

@@ -1,5 +1,12 @@
 import './Features.css';
 
+/**
+ * Component which contains features
+ * 
+ * @param {DOMElement} children 
+ * 
+ * @returns Features component
+ */
 function Features({children}) {
     return (
         <section className="features">

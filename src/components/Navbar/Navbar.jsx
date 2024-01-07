@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { storeSelector } from "../../store/storeSelectors";
 import { clearStore } from "../../store/storeActions";
 
+/**
+ * Component which displays navbar
+ * in terms of user's login
+ * 
+ * @returns Navbar component
+ */
 function Navbar() {
     const store = useSelector(storeSelector);
     const dispatch = useDispatch();

@@ -32,7 +32,7 @@ export const userProfile = createAsyncThunk('store/userProfile', async (token) =
     try {
         const response = await axios.post(`http://localhost:3001/api/v1/user/profile`, {}, {
             headers: {
-              'Authorization': `Bearer ${token}` 
+                'Authorization': `Bearer ${token}` 
             }
         });
 
@@ -52,7 +52,7 @@ export const userUpdateProfile = createAsyncThunk('store/userUpdateProfile', asy
             lastName: lastName
         }, {
             headers: {
-              'Authorization': `Bearer ${token}` 
+                'Authorization': `Bearer ${token}` 
             }
         });
 
