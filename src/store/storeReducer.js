@@ -37,7 +37,6 @@ export const userProfile = createAsyncThunk('store/userProfile', async (token) =
         });
 
         if (response.status === 200) {
-            // console.log(response.data);
             return response.data;
         }
     } catch (error) {
@@ -57,15 +56,12 @@ export const userUpdateProfile = createAsyncThunk('store/userUpdateProfile', asy
         });
 
         if (response.status === 200) {
-            // console.log(response.data);
             return response.data;
         }
     } catch (error) {
         throw error;
     }
 })
-
-// https://redux.js.org/tutorials/essentials/part-5-async-logic#fetching-data-with-createasyncthunk
 
 export const storeSlice = createSlice({
     name: "store",
@@ -85,9 +81,6 @@ export const storeSlice = createSlice({
     },
     extraReducers(builder) {
         builder
-            // .addCase(userLogin.pending, (state, action) => {
-            //     console.log('loading');
-            // })
             .addCase(userLogin.fulfilled, (state, action) => {
                 const isLogged = true;
                 const email = action.payload.email;

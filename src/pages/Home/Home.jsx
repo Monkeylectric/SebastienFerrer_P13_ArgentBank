@@ -12,8 +12,6 @@ import ChatIcon from '../../img/icon-chat.png';
 import MoneyIcon from '../../img/icon-money.png';
 import SecurityIcon from '../../img/icon-security.png';
 
-// import { useLoaderData } from "react-router-dom";
-
 function Home() {
     return (
         <React.Fragment>

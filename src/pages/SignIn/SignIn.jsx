@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './SignIn.css';
 
 import Navbar from '../../components/Navbar/Navbar';
 import Main from '../../components/Main/Main';
 import Form from '../../components/Form/Form';
 import Footer from '../../components/Footer/Footer';
-
-// prop types
 
 function SignIn() {
     return (

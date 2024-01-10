@@ -9,8 +9,6 @@ import Footer from '../../components/Footer/Footer';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeSelector } from '../../store/storeSelectors';
-// import { userProfile } from '../../services/data.service';
-import { setUserProfil } from '../../store/storeActions';
 import { userProfile } from '../../store/storeReducer';
 
 function User() {
@@ -21,20 +19,10 @@ function User() {
     const authToken = user.authToken;
     let firstName = user.userFirstName;
     let lastName = user.userLastName;
-    // const userToken = sessionStorage.getItem("token");
-    // console.log(userToken);
     
     if (!authToken) {
         return <Navigate to="/signin" />
     }
-
-    // const getUser = async () => {
-    //     const profile = await userProfile(authToken);
-    //     const firstname = profile.body.firstName;
-    //     const lastname = profile.body.lastName;
-
-    //     dispatch(setUserProfil(firstname, lastname));
-    // }
     
     useEffect(() => {
         dispatch(userProfile(authToken));
