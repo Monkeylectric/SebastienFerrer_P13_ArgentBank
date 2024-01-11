@@ -32,6 +32,7 @@ export const userProfile = createAsyncThunk('store/userProfile', async (token) =
     try {
         const response = await axios.post(`http://localhost:3001/api/v1/user/profile`, {}, {
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}` 
             }
         });
@@ -44,13 +45,14 @@ export const userProfile = createAsyncThunk('store/userProfile', async (token) =
     }
 })
 
-export const userUpdateProfile = createAsyncThunk('store/userUpdateProfile', async (firstName, lastName, token) => {
+export const userUpdateProfile = createAsyncThunk('store/userUpdateProfile', async ({newFirstName, newLastName, token}) => {
     try {
         const response = await axios.put(`http://localhost:3001/api/v1/user/profile`, {
-            firstName: firstName,
-            lastName: lastName
+            firstName: newFirstName,
+            lastName: newLastName
         }, {
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}` 
             }
         });
@@ -111,6 +113,9 @@ export const storeSlice = createSlice({
 
                 state.userFirstName = firstName;
                 state.userLastName = lastName;
+            })
+            .addCase(userUpdateProfile.rejected, (state, action) => {
+                console.log(action);
             })
     }
 })

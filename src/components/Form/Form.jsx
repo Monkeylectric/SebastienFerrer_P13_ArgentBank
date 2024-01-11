@@ -1,16 +1,14 @@
 import './Form.css';
 import InputWrapper from '../InputWrapper/InputWrapper';
-// import { userLogin } from '../../services/data.service';
 import { userLogin } from '../../store/storeReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect } from 'react';
-import { setUserLogin } from '../../store/storeActions';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { storeSelector } from '../../store/storeSelectors';
 
 function Form() {
-    const email = 'tony@stark.com';
-    const password = 'password123';
+    // const email = 'tony@stark.com';
+    // const password = 'password123';
 
     // email: 'steve@rogers.com',
     // password: 'password456'
@@ -22,8 +20,8 @@ function Form() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // const email = document.querySelector("#username").value;
-        // const password = document.querySelector("#password").value;
+        let email = document.querySelector("#username").value;
+        let password = document.querySelector("#password").value;
 
         dispatch(userLogin({email, password}));
     }

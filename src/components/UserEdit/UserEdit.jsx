@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import './UserEdit.css';
-import { profilEdit, setUserProfil } from '../../store/storeActions';
-// import { userUpdateProfile } from '../../services/data.service';
+import { profilEdit } from '../../store/storeActions';
 import { storeSelector } from '../../store/storeSelectors';
 import { userUpdateProfile } from '../../store/storeReducer';
 
@@ -19,8 +18,6 @@ function UserEdit({firstname, lastname}) {
     const user = useSelector(storeSelector);
     const dispatch = useDispatch();
 
-    const authToken = user.authToken;
-
     const handleCancelEdit = (e) => {
         e.preventDefault();
 
@@ -30,10 +27,11 @@ function UserEdit({firstname, lastname}) {
     const handleSaveEdit = (e) => {
         e.preventDefault();
 
-        const newFirstName = document.querySelector("#firstname").value;
-        const newLastName = document.querySelector("#lastname").value;
+        let token = user.authToken;
+        let newFirstName = document.querySelector("#firstname").value;
+        let newLastName = document.querySelector("#lastname").value;
 
-        dispatch(userUpdateProfile(newFirstName, newLastName, authToken));
+        dispatch(userUpdateProfile({newFirstName, newLastName, token}));
     }
 
     return (

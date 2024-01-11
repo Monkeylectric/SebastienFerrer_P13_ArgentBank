@@ -25,7 +25,7 @@ function Hero({subtitles, text}) {
 }
 
 Hero.propTypes = {
-    subtitles: PropTypes.object,
+    subtitles: PropTypes.array,
     text: PropTypes.string,
 }
 
