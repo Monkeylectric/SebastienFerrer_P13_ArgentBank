@@ -1,6 +1,6 @@
 import './Form.css';
 import InputWrapper from '../InputWrapper/InputWrapper';
-import { userLogin } from '../../store/storeReducer';
+import { userLogin } from '../../store/storeActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";

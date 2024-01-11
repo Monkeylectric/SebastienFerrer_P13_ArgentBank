@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './UserEdit.css';
 import { profilEdit } from '../../store/storeActions';
 import { storeSelector } from '../../store/storeSelectors';
-import { userUpdateProfile } from '../../store/storeReducer';
+import { userUpdateProfile } from '../../store/storeActions';
 
 /**
  * Component which displays inputs

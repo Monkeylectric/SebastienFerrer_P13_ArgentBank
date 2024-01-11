@@ -9,11 +9,11 @@ import Footer from '../../components/Footer/Footer';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeSelector } from '../../store/storeSelectors';
-import { userProfile } from '../../store/storeReducer';
+import { userProfile } from '../../store/storeActions';
 
 function User() {
     const user = useSelector(storeSelector);
-    console.log(user);
+    // console.log(user);
     const dispatch = useDispatch();
 
     const authToken = user.authToken;

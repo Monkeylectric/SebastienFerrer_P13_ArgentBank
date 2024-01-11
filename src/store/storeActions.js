@@ -1,16 +1,60 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const setUserLogin = createAction("store/setUserLogin", (email, token) => {
-    return {
-        payload: { email, token }
-    }
-});
+export const userLogin = createAsyncThunk('store/userLogin', async ({email, password}) => {
+    try {
+        const response = await axios.post(`http://localhost:3001/api/v1/user/login`, {
+            email,
+            password
+        });
 
-export const setUserProfil = createAction("store/setUserProfil", (firstName, lastName) => {
-    return {
-        payload: { firstName, lastName }
+        console.log(response);
+
+        if (response.status === 200) {
+            console.log(response.data);
+            return response.data;
+        }
+    } catch (error) {
+        throw error;
     }
-});
+})
+
+export const userProfile = createAsyncThunk('store/userProfile', async (token) => {
+    try {
+        const response = await axios.post(`http://localhost:3001/api/v1/user/profile`, {}, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            }
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        throw error;
+    }
+})
+
+export const userUpdateProfile = createAsyncThunk('store/userUpdateProfile', async ({newFirstName, newLastName, token}) => {
+    try {
+        const response = await axios.put(`http://localhost:3001/api/v1/user/profile`, {
+            firstName: newFirstName,
+            lastName: newLastName
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            }
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        throw error;
+    }
+})
 
 export const profilEdit = createAction("store/profilEdit");
 

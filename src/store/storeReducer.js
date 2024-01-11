@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit"
+import { userLogin, userProfile, userUpdateProfile } from './storeActions';
 
 const initialState = {
     isLogged: false,
@@ -9,61 +9,6 @@ const initialState = {
     isUserEdit: false,
     authToken: null,
 }
-
-export const userLogin = createAsyncThunk('store/userLogin', async ({email, password}) => {
-    try {
-        const response = await axios.post(`http://localhost:3001/api/v1/user/login`, {
-            email,
-            password
-        });
-
-        console.log(response);
-
-        if (response.status === 200) {
-            console.log(response.data);
-            return response.data;
-        }
-    } catch (error) {
-        throw error;
-    }
-})
-
-export const userProfile = createAsyncThunk('store/userProfile', async (token) => {
-    try {
-        const response = await axios.post(`http://localhost:3001/api/v1/user/profile`, {}, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            }
-        });
-
-        if (response.status === 200) {
-            return response.data;
-        }
-    } catch (error) {
-        throw error;
-    }
-})
-
-export const userUpdateProfile = createAsyncThunk('store/userUpdateProfile', async ({newFirstName, newLastName, token}) => {
-    try {
-        const response = await axios.put(`http://localhost:3001/api/v1/user/profile`, {
-            firstName: newFirstName,
-            lastName: newLastName
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            }
-        });
-
-        if (response.status === 200) {
-            return response.data;
-        }
-    } catch (error) {
-        throw error;
-    }
-})
 
 export const storeSlice = createSlice({
     name: "store",
@@ -85,12 +30,10 @@ export const storeSlice = createSlice({
         builder
             .addCase(userLogin.fulfilled, (state, action) => {
                 const isLogged = true;
-                const email = action.payload.email;
                 const token = action.payload.body.token;
 
                 if (isLogged) {
                     state.isLogged = isLogged;
-                    state.userEmail = email;
                     state.authToken = token;
                 }
             })
@@ -98,11 +41,14 @@ export const storeSlice = createSlice({
                 console.log(action.error);
             })
             .addCase(userProfile.fulfilled, (state, action) => {
+                console.log(action);
                 const firstName = action.payload.body.firstName;
                 const lastName = action.payload.body.lastName;
+                const email = action.payload.body.email;
 
                 state.userFirstName = firstName;
                 state.userLastName = lastName;
+                state.userEmail = email;
             })
             .addCase(userProfile.rejected, (state, action) => {
                 console.log(action.error);
