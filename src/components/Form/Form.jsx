@@ -22,8 +22,9 @@ function Form() {
 
         let email = document.querySelector("#username").value;
         let password = document.querySelector("#password").value;
+        let rememberMe = document.querySelector("#remember-me").checked;
 
-        dispatch(userLogin({email, password}));
+        dispatch(userLogin({email, password, rememberMe}));
     }
 
     useEffect(() => {

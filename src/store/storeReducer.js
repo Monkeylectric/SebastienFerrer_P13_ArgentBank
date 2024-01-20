@@ -7,7 +7,7 @@ const initialState = {
     userLastName: null,
     userEmail: null,
     isUserEdit: false,
-    authToken: null,
+    authToken: (localStorage.getItem("userToken") || sessionStorage.getItem("userToken")) ?? null,
 }
 
 export const storeSlice = createSlice({
@@ -24,6 +24,9 @@ export const storeSlice = createSlice({
             state.userEmail = null;
             state.isUserEdit = false;
             state.authToken = null;
+
+            localStorage.clear();
+            sessionStorage.clear();
         }
     },
     extraReducers(builder) {
@@ -35,13 +38,15 @@ export const storeSlice = createSlice({
                 if (isLogged) {
                     state.isLogged = isLogged;
                     state.authToken = token;
+
+                    if (sessionStorage.getItem("rememberMe")) localStorage.setItem("userToken", token);
+                    else sessionStorage.setItem("userToken", token);
                 }
             })
             .addCase(userLogin.rejected, (state, action) => {
                 console.log(action.error);
             })
             .addCase(userProfile.fulfilled, (state, action) => {
-                console.log(action);
                 const firstName = action.payload.body.firstName;
                 const lastName = action.payload.body.lastName;
                 const email = action.payload.body.email;

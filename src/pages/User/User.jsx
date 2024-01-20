@@ -13,7 +13,6 @@ import { userProfile } from '../../store/storeActions';
 
 function User() {
     const user = useSelector(storeSelector);
-    // console.log(user);
     const dispatch = useDispatch();
 
     const authToken = user.authToken;

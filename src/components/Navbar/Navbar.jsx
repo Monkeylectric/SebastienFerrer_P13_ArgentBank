@@ -5,7 +5,8 @@ import userIcon from "../../img/user-icon.png";
 import Profil from "../Profil/Profil";
 import { useDispatch, useSelector } from "react-redux";
 import { storeSelector } from "../../store/storeSelectors";
-import { clearStore } from "../../store/storeActions";
+import { clearStore, userProfile } from "../../store/storeActions";
+import { useEffect } from "react";
 
 /**
  * Component which displays navbar
@@ -21,18 +22,11 @@ function Navbar() {
         dispatch(clearStore());
     }
 
-    const links = store.isLogged ?
-        <>
-            <Profil name={store.userFirstName} picture={userIcon} />
-            <NavLink to="/" className="main-nav-item" onClick={() => handleDisconnection()}>
-                <i className="fa fa-sign-out"></i>
-                Sign Out
-            </NavLink>
-        </> : 
-        <NavLink to="/signin" className="main-nav-item">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-        </NavLink>;
+    useEffect(() => {
+        if (store.authToken) {
+            dispatch(userProfile(store.authToken));
+        }
+    }, [])
 
     return (
         <nav className="main-nav">
@@ -41,7 +35,22 @@ function Navbar() {
                 <h1 className="sr-only">Argent Bank</h1>
             </NavLink>
             <div className="main-nav-links">
-                { links }
+                { 
+                    store.authToken ?
+                        <>
+                            <NavLink to="/user" className="main-nav-item">
+                                <Profil name={store.userFirstName} picture={userIcon} />
+                            </NavLink>
+                            <NavLink to="/" className="main-nav-item" onClick={() => handleDisconnection()}>
+                                <i className="fa fa-sign-out"></i>
+                                Sign Out
+                            </NavLink>
+                        </> : 
+                        <NavLink to="/signin" className="main-nav-item">
+                            <i className="fa fa-user-circle"></i>
+                            Sign In
+                        </NavLink>
+                }
             </div>
         </nav>
     )

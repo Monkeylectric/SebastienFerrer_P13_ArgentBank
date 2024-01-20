@@ -1,17 +1,16 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const userLogin = createAsyncThunk('store/userLogin', async ({email, password}) => {
+export const userLogin = createAsyncThunk('store/userLogin', async ({email, password, rememberMe}) => {
     try {
         const response = await axios.post(`http://localhost:3001/api/v1/user/login`, {
             email,
             password
         });
 
-        console.log(response);
-
         if (response.status === 200) {
-            console.log(response.data);
+            if (rememberMe) sessionStorage.setItem("rememberMe", rememberMe);
+
             return response.data;
         }
     } catch (error) {
