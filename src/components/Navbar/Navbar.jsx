@@ -39,7 +39,7 @@ function Navbar() {
                     store.authToken ?
                         <>
                             <NavLink to="/user" className="main-nav-item">
-                                <Profil name={store.userFirstName} picture={userIcon} />
+                                <Profil name={`${store.userFirstName} ${store.userLastName}`} picture={userIcon} />
                             </NavLink>
                             <NavLink to="/" className="main-nav-item" onClick={() => handleDisconnection()}>
                                 <i className="fa fa-sign-out"></i>

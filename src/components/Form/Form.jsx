@@ -6,13 +6,13 @@ import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { storeSelector } from '../../store/storeSelectors';
 
+/**
+ * Component which displays form
+ * with inputs and submit button
+ * 
+ * @returns Form component
+ */
 function Form() {
-    // const email = 'tony@stark.com';
-    // const password = 'password123';
-
-    // email: 'steve@rogers.com',
-    // password: 'password456'
-
     const navigate = useNavigate();
     const user = useSelector(storeSelector);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Form() {
         let email = document.querySelector("#username").value;
         let password = document.querySelector("#password").value;
         let rememberMe = document.querySelector("#remember-me").checked;
-
+        
         dispatch(userLogin({email, password, rememberMe}));
     }
 

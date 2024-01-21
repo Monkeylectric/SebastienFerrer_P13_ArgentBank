@@ -12,20 +12,22 @@ import './InputWrapper.css';
  * 
  * @returns InputWrapper component
  */
-function InputWrapper({className, id, label, type}) {
+function InputWrapper({className, id, label, type, pattern, required}) {
     return (
         <div className={className}>
             <label htmlFor={id}>{label}</label>
-            <input type={type} id={id} />
+            <input type={type} id={id} pattern={pattern} required={required} />
         </div>
     )
 }
 
 InputWrapper.propTypes = {
     className: PropTypes.string,
-    id: PropTypes.string,
-    label: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     type: PropTypes.string,
+    pattern: PropTypes.string,
+    required: PropTypes.string,
 }
 
 export default InputWrapper;

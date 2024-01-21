@@ -9,7 +9,7 @@ export const userLogin = createAsyncThunk('store/userLogin', async ({email, pass
         });
 
         if (response.status === 200) {
-            if (rememberMe) sessionStorage.setItem("rememberMe", rememberMe);
+            if (rememberMe) localStorage.setItem("userToken", response.data.body.token);
 
             return response.data;
         }

@@ -35,12 +35,11 @@ export const storeSlice = createSlice({
                 const isLogged = true;
                 const token = action.payload.body.token;
 
-                if (isLogged) {
+                if (token) {
                     state.isLogged = isLogged;
                     state.authToken = token;
 
-                    if (sessionStorage.getItem("rememberMe")) localStorage.setItem("userToken", token);
-                    else sessionStorage.setItem("userToken", token);
+                    if (!localStorage.getItem("userToken")) sessionStorage.setItem("userToken", token);
                 }
             })
             .addCase(userLogin.rejected, (state, action) => {
