@@ -12,11 +12,12 @@ import './InputWrapper.css';
  * 
  * @returns InputWrapper component
  */
-function InputWrapper({className, id, label, type, pattern, required}) {
+function InputWrapper({className, id, label, type, error}) {
     return (
         <div className={className}>
             <label htmlFor={id}>{label}</label>
-            <input type={type} id={id} pattern={pattern} required={required} />
+            <input type={type} id={id} />
+            {error ? <span className='error-message'>{error}</span> : null}
         </div>
     )
 }
@@ -26,8 +27,7 @@ InputWrapper.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string,
-    pattern: PropTypes.string,
-    required: PropTypes.string,
+    error: PropTypes.string,
 }
 
 export default InputWrapper;
